@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>I'm Sorry ❤️</title>
+<style>
+/* Reset & Base */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#fff0f4;font-family:'Segoe UI',sans-serif;}
+body{color:#2b2b2b;}
+#app{display:flex;align-items:center;justify-content:center;height:100vh;position:relative;}
+
+/* Slider Pages */
+.slider{width:100%;height:100%;display:flex;transition:transform 1s ease;}
+.section{min-width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;}
+.card{background:rgba(255,255,255,.85);backdrop-filter:blur(6px);padding:28px;border-radius:18px;box-shadow:0 10px 40px rgba(43,43,43,.07);max-width:950px;text-align:center;animation:fadeIn 1.5s ease;}
+@keyframes fadeIn{0%{opacity:0;transform:translateY(20px);}100%{opacity:1;transform:translateY(0);}}
+
+/* Titles */
+.title{font-size:clamp(36px,6vw,78px);letter-spacing:2px;margin-bottom:18px;position:relative;color:#ff3366;text-shadow:0 4px 14px rgba(255,51,102,.3);}
+.text{font-size:20px;margin-top:8px;line-height:1.6;color:#444;padding:0 20px;}
+.controls{display:flex;gap:14px;margin-top:24px;justify-content:center;}
+button{background:#ff4d7a;border:none;color:white;padding:12px 20px;border-radius:999px;font-weight:600;cursor:pointer;font-size:16px;box-shadow:0 8px 20px rgba(255,77,122,.2);transition:transform .18s;}
+button.secondary{background:transparent;color:#ff3b6b;border:2px solid rgba(255,59,107,.3);}
+button:hover{transform:scale(1.05);}
+button:active{transform:scale(.95);}
+
+/* Topbar */
+.topbar{position:absolute;left:20px;top:20px;display:flex;gap:10px;align-items:center;z-index:30;}
+.uinput{background:rgba(255,255,255,.7);border-radius:999px;padding:8px 12px;border:1px solid rgba(0,0,0,.05);display:flex;align-items:center;gap:8px;}
+input[type=text]{border:none;background:transparent;outline:none;font-weight:700;width:140px;font-size:14px;}
+
+/* Background hearts */
+.hearts-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
+.floating-heart{position:absolute;font-size:20px;opacity:.12;animation:floatUp linear infinite;}
+@keyframes floatUp{0%{transform:translateY(0) scale(1);opacity:.12;}50%{opacity:.18;}100%{transform:translateY(-300px) scale(1.6);opacity:0;}}
+
+/* Cursor heart trail */
+.cursor-heart{
+  position:fixed;left:0;top:0;pointer-events:none;font-size:20px;
+  transform:translate(-50%,-50%);animation:trailAnim 1.2s forwards;
+}
+@keyframes trailAnim{
+  0%{opacity:1;transform:translate(-50%,-50%) scale(1);}
+  100%{opacity:0;transform:translate(-50%,-140%) scale(1.8) rotate(-15deg);}
+}
+
+/* Surprise Overlay */
+#surpriseOverlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.88);display:flex;flex-direction:column;justify-content:center;align-items:center;
+  z-index:999;opacity:0;pointer-events:none;transition:opacity 0.8s ease;
+}
+#surpriseOverlay.active{opacity:1;pointer-events:auto;}
+.surprise-content{text-align:center;color:white;animation:popIn 1.2s ease;}
+@keyframes popIn{0%{transform:scale(0);opacity:0;}70%{transform:scale(1.2);opacity:1;}100%{transform:scale(1);}}
+.surprise-content h1{font-size:64px;margin-bottom:20px;color:#ff3b6b;text-shadow:0 0 20px #ff99aa;}
+.surprise-content p{font-size:22px;margin-bottom:30px;}
+.quote-carousel{font-size:20px;max-width:600px;margin:0 auto;color:#ffdde2;line-height:1.4;margin-top:20px;}
+.close-btn{background:#fff;color:#ff3b6b;border:none;padding:12px 22px;border-radius:20px;font-weight:700;cursor:pointer;font-size:16px;margin-top:20px;}
+.close-btn:hover{transform:scale(1.05);}
+.heart-rain{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:1000;}
+.heart-rain span{
+  position:absolute;color:#ff3b6b;font-size:24px;animation:fall 4s linear forwards;
+}
+@keyframes fall{
+  0%{transform:translateY(-10%) rotate(0deg);opacity:1;}
+  100%{transform:translateY(110vh) rotate(360deg);opacity:0;}
+}
+/* Fireworks */
+.firework{
+  position:absolute;width:8px;height:8px;background:#fff;border-radius:50%;animation:firework 1s ease-out forwards;
+}
+@keyframes firework{
+  0%{transform:scale(0);opacity:1;}
+  100%{transform:scale(6);opacity:0;}
+}
+</style>
+</head>
+<body>
+<div id="app">
+<div class="hearts-bg" id="bgHearts"></div>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="uinput">
+    <label style="font-weight:600;color:#ff3b6b;">To</label>
+    <input id="nameInput" type="text" placeholder="Enter name" />
+  </div>
+</div>
+
+<!-- Pages -->
+<div class="slider" id="slider">
+  <!-- Page 1 -->
+  <section class="section">
+    <div class="card">
+      <div class="title">I'M SORRY ❤️</div>
+      <div class="text">I made mistakes, and I feel the weight of every one. Please let me fix this and show you the love you deserve.</div>
+      <div class="controls"><button id="toPage2">Next ➜</button></div>
+    </div>
+  </section>
+  <!-- Page 2 -->
+  <section class="section">
+    <div class="card">
+      <div class="title">I Love You Forever 💞</div>
+      <div class="text">Every beat of my heart whispers your name. Every moment without you feels empty. You’re my today and all of my tomorrows.</div>
+      <div class="controls"><button id="toPage3">Next ➜</button><button id="back1" class="secondary">Back ◀</button></div>
+    </div>
+  </section>
+  <!-- Page 3 -->
+  <section class="section">
+    <div class="card">
+      <div class="title">For <span id="finalName">My Love</span></div>
+      <div class="text">If you can forgive me, I promise to cherish you more than yesterday and less than tomorrow. You’re my everything.</div>
+      <div class="controls"><button id="forgiveBtn">Forgive Me ❤️</button><button id="back2" class="secondary">Back ◀</button></div>
+    </div>
+  </section>
+</div>
+
+<!-- Auto Play Audio -->
+<audio id="bgAudio" autoplay loop>
+  <source src="Die With A Smile Ringtone Download - MobCup.Com.Co.mp3" type="audio/mp3">
+</audio>
+
+<!-- Surprise Overlay -->
+<div id="surpriseOverlay">
+  <div class="surprise-content">
+    <h1>Thank You ❤️</h1>
+    <p>You’ve just made my life complete again!</p>
+    <div class="quote-carousel" id="quoteCarousel"></div>
+    <button class="close-btn" onclick="hideSurprise()">Close Surprise</button>
+  </div>
+</div>
+<div class="heart-rain" id="heartRain"></div>
+<script>
+const slider=document.getElementById('slider');
+const toPage2=document.getElementById('toPage2'),toPage3=document.getElementById('toPage3');
+const back1=document.getElementById('back1'),back2=document.getElementById('back2');
+const nameInput=document.getElementById('nameInput'),finalName=document.getElementById('finalName');
+function goTo(n){slider.style.transform=`translateX(-${n*100}%)`;}
+toPage2.onclick=()=>goTo(1);
+toPage3.onclick=()=>{finalName.textContent=nameInput.value||'My Love';goTo(2);}
+back1.onclick=()=>goTo(0);
+back2.onclick=()=>goTo(1);
+
+// floating hearts
+const bgHearts=document.getElementById('bgHearts');
+function spawnBgHeart(){
+  const h=document.createElement('div');h.className='floating-heart';h.textContent='❤';
+  const size=Math.random()*36+12;h.style.fontSize=size+'px';
+  h.style.left=Math.random()*100+'%';h.style.top=(90+Math.random()*10)+'%';
+  h.style.opacity=(Math.random()*0.3)+0.06;h.style.animationDuration=(8+Math.random()*6)+'s';
+  bgHearts.appendChild(h);setTimeout(()=>h.remove(),16000);
+}
+for(let i=0;i<20;i++){setTimeout(spawnBgHeart,i*700);}setInterval(spawnBgHeart,1800);
+
+// cursor heart trail
+document.addEventListener('mousemove',e=>createCursorHeart(e.clientX,e.clientY));
+function createCursorHeart(x,y){
+  const el=document.createElement('div');
+  el.className='cursor-heart';el.textContent='❤';
+  const size=Math.random()*10+16;
+  el.style.left=x+'px';el.style.top=y+'px';el.style.fontSize=size+'px';
+  el.style.color=`hsl(${330+Math.random()*20},100%,${50-Math.random()*10}%)`;
+  document.body.appendChild(el);setTimeout(()=>el.remove(),1200);
+}
+
+// Surprise logic
+const forgiveBtn=document.getElementById('forgiveBtn');
+const surpriseOverlay=document.getElementById('surpriseOverlay');
+const heartRain=document.getElementById('heartRain');
+const quotes=[
+  "“I would rather spend one lifetime with you than face all the ages of this world alone.”",
+  "“You’re the reason my heart beats stronger every day.”",
+  "“Love is not finding someone to live with, it’s finding someone you can’t live without.”",
+  "“In your arms, I’ve found my home.”"
+];
+forgiveBtn.addEventListener('click',showSurprise);
+function showSurprise(){
+  surpriseOverlay.classList.add('active');
+  launchHearts();
+  launchFireworks();
+  startQuotes();
+}
+function hideSurprise(){
+  surpriseOverlay.classList.remove('active');
+  heartRain.innerHTML='';
+}
+function launchHearts(){
+  heartRain.innerHTML='';
+  for(let i=0;i<50;i++){
+    const span=document.createElement('span');
+    span.textContent='❤';
+    span.style.left=Math.random()*100+'%';
+    span.style.fontSize=(Math.random()*20+16)+'px';
+    span.style.color=`hsl(${330+Math.random()*20},100%,${50-Math.random()*10}%)`;
+    span.style.animationDuration=(Math.random()*2+3)+'s';
+    heartRain.appendChild(span);
+    setTimeout(()=>span.remove(),4000);
+  }
+}
+function launchFireworks(){
+  for(let i=0;i<18;i++){
+    setTimeout(()=>{
+      const fw=document.createElement('div');
+      fw.className='firework';
+      fw.style.left=Math.random()*100+'%';
+      fw.style.top=Math.random()*80+'%';
+      fw.style.background=`hsl(${Math.random()*360},100%,70%)`;
+      document.body.appendChild(fw);
+      setTimeout(()=>fw.remove(),1000);
+    },i*150);
+  }
+}
+// Quotes carousel
+const quoteCarousel=document.getElementById('quoteCarousel');
+let qIndex=0;
+function startQuotes(){
+  qIndex=0;
+  updateQuote();
+  setInterval(updateQuote,3000);
+}
+function updateQuote(){
+  quoteCarousel.textContent=quotes[qIndex];
+  qIndex=(qIndex+1)%quotes.length;
+}
+
+// Improved autoplay for browsers (start after first click or interaction)
+function tryPlayAudio() {
+  const audio = document.getElementById('bgAudio');
+  if (audio && audio.paused) {
+    audio.play().catch(()=>{});
+  }
+}
+window.addEventListener('DOMContentLoaded', tryPlayAudio);
+['click', 'touchstart', 'keydown'].forEach(evt => {
+  document.body.addEventListener(evt, tryPlayAudio, { once: true });
+});
+</script>
+</div>
+</body>
+</html>
